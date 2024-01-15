@@ -1,0 +1,16 @@
+if ARCH_BCM6750
+
+config SYS_VENDOR
+	default "broadcom"
+
+config SYS_BOARD
+	default "bcm96750ref1"
+
+config SYS_CONFIG_NAME
+	default "broadcom_bcm96750ref1"
+
+endif
+
+config TARGET_BCM96750REF1
+	bool "Support Broadcom bcm96750ref1"
+	depends on ARCH_BCM6750
