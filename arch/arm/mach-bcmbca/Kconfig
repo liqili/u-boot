@@ -62,6 +62,13 @@ config BCM63178
 	select DM_SERIAL
 	select PL01X_SERIAL
 
+config BCM6750
+	bool "Support for Broadcom 6750 Family"
+	select SYS_ARCH_TIMER
+	select CPU_V7A
+	select DM_SERIAL
+	select PL01X_SERIAL
+
 config BCM6756
 	bool "Support for Broadcom 6756 Family"
 	select SYS_ARCH_TIMER

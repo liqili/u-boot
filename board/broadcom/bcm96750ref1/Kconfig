@@ -1,4 +1,4 @@
-if ARCH_BCM6750
+if BCM6750
 
 config SYS_VENDOR
 	default "broadcom"
@@ -13,4 +13,4 @@ endif
 
 config TARGET_BCM96750REF1
 	bool "Support Broadcom bcm96750ref1"
-	depends on ARCH_BCM6750
+	depends on BCM6750

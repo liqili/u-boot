@@ -134,7 +134,7 @@ config NAND_BRCMNAND_6753
 
 config NAND_BRCMNAND_6750
        bool "Support Broadcom NAND controller on bcm6750"
-       depends on NAND_BRCMNAND && ARCH_BCM6750
+       depends on NAND_BRCMNAND && BCM6750
        help
          Enable support for broadcom nand driver on bcm6750.
 

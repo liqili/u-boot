@@ -132,7 +132,7 @@ config WDT_AT91
 
 config WDT_BCM6345
 	bool "BCM6345 watchdog timer support"
-	depends on WDT && (ARCH_BMIPS || ARCH_BCM6750 || BCM6856 || \
+	depends on WDT && (ARCH_BMIPS || BCM6750 || BCM6856 || \
 			   BCM6858 || BCM63158 || BCM6855)
 	help
 	  Select this to enable watchdog timer for BCM6345 SoCs.

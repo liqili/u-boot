@@ -110,7 +110,7 @@ config BCM2835_GPIO
 
 config BCM6345_GPIO
 	bool "BCM6345 GPIO driver"
-	depends on DM_GPIO && (ARCH_BMIPS || ARCH_BCM6750 || BCM6856 || \
+	depends on DM_GPIO && (ARCH_BMIPS || BCM6750 || BCM6856 || \
 			       BCM6858 || BCM63158 || BCM6855)
 	help
 	  This driver supports the GPIO banks on BCM6345 SoCs.
