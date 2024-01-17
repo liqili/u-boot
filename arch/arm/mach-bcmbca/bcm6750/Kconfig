@@ -5,13 +5,14 @@
 
 if BCM6750
 
-config TARGET_BCM96750
+config TARGET_BCM96750REF1
 	bool "Broadcom 6750 Reference Board"
 	depends on ARCH_BCMBCA
 
 config SYS_SOC
 	default "bcm6750"
 
-source "board/broadcom/bcmbca/Kconfig"
+source "board/broadcom/bcm96750ref1/Kconfig"
 
 endif
+
