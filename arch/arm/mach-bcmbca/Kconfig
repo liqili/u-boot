@@ -127,6 +127,13 @@ config BCM6878
 	select DM_SERIAL
 	select PL01X_SERIAL
 
+config BCM4708
+	bool "Support for Broadcom 4708 Family"
+	select SYS_ARCH_TIMER
+	select CPU_V7A
+	select DM_SERIAL
+	select PL01X_SERIAL
+
 source "arch/arm/mach-bcmbca/bcm47622/Kconfig"
 source "arch/arm/mach-bcmbca/bcm4908/Kconfig"
 source "arch/arm/mach-bcmbca/bcm4912/Kconfig"
@@ -143,5 +150,6 @@ source "arch/arm/mach-bcmbca/bcm6855/Kconfig"
 source "arch/arm/mach-bcmbca/bcm6856/Kconfig"
 source "arch/arm/mach-bcmbca/bcm6858/Kconfig"
 source "arch/arm/mach-bcmbca/bcm6878/Kconfig"
+source "arch/arm/mach-bcmbca/bcm4708/Kconfig"
 
 endif

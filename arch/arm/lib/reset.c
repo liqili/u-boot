@@ -31,6 +31,10 @@ __weak void reset_misc(void)
 {
 }
 
+__weak void reset_cpu(void)
+{
+}
+
 int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 {
 	puts ("resetting ...\n");

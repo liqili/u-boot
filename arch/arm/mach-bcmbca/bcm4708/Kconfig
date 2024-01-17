@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: GPL-2.0+
+#
+# (C) Copyright 2022 Broadcom Ltd
+#
+
+if BCM4708
+
+config TARGET_BCM4708
+	bool "Broadcom 4708 Reference Board"
+	depends on ARCH_BCMBCA
+
+config SYS_SOC
+	default "bcm4708"
+
+source "board/broadcom/bcm4708/Kconfig"
+
+endif

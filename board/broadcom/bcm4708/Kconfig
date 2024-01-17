@@ -1,0 +1,12 @@
+if TARGET_BCM4708
+
+config SYS_VENDOR
+	default "broadcom"
+
+config SYS_BOARD
+	default "bcm4708"
+
+config SYS_CONFIG_NAME
+	default "broadcom_bcm4708"
+
+endif

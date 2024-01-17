@@ -1,0 +1,6 @@
+BCM96750REF1 BOARD
+M:	Philippe Reynes <philippe.reynes@softathome.com>
+S:	Maintained
+F:	board/broadcom/bcm96750ref1
+F:	include/configs/broadcom_bcm96750ref1.h
+F:	configs/bcm96750ref1_ram_defconfig
