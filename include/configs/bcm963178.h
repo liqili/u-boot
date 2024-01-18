@@ -22,7 +22,7 @@
 #define CONFIG_SYS_SEC_CRED_ADDR        (CONFIG_SYS_INIT_STD_32K_ADDR + 0x7000)
 /* RAM */
 #define PHYS_SDRAM_1			0x00000000UL
-#define PHYS_SDRAM_1_SIZE		(2UL * SZ_1G) /* Maximum possible bnk 0 size */
+#define PHYS_SDRAM_1_SIZE		(1UL * SZ_512M) /* Maximum possible bnk 0 size */
 #define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM_1
 
 /* U-Boot */
