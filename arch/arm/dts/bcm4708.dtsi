@@ -9,22 +9,6 @@
 #include "bcm5301x.dtsi"
 / {
 	compatible = "brcm,bcm4708";
-    #address-cells = <0x1>;
-	#size-cells = <0x1>;
-
-	aliases {
-		serial0 = &uart0;
-	};
-
-
-	chosen {
-		stdout-path = "serial0:115200n8";
-	};
-
-	memory {
-		device_type = "memory";
-		reg = <0x0 0x10000000>; /* 256M */
-	};
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -33,38 +17,12 @@
 			compatible = "arm,cortex-a9";
 			next-level-cache = <&L2>;
 			reg = <0x0>;
-            u-boot,dm-pre-reloc;
 		};
 		cpu@1 {
 			device_type = "cpu";
 			compatible = "arm,cortex-a9";
 			next-level-cache = <&L2>;
 			reg = <0x1>;
-            u-boot,dm-pre-reloc;
-		};
-        l2: l2-cache0 {
-			compatible = "cache";
-			u-boot,dm-pre-reloc;
-		};
-	};
-    clocks {
-		compatible = "simple-bus";
-		#address-cells = <1>;
-		#size-cells = <1>;
-		ranges;
-		u-boot,dm-pre-reloc;
-
-		periph_osc: periph-osc {
-			compatible = "fixed-clock";
-			#clock-cells = <0>;
-			clock-frequency = <400000000>;
-			u-boot,dm-pre-reloc;
-		};
-
-		refclk50mhz: refclk50mhz {
-			compatible = "fixed-clock";
-			#clock-cells = <0>;
-			clock-frequency = <50000000>;
 		};
 	};
 };

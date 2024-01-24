@@ -11,11 +11,89 @@
 / {
 	compatible = "netgear,r6250v1", "brcm,bcm4708";
 	model = "Netgear R6250 V1 (BCM4708)";
-	chosen {
-		bootargs = "console=ttyS0,115200";
-	};
 	memory {
-		reg = <0x00000000 0x08000000>;
+		reg = <0x00000000 0x08000000
+		       0x88000000 0x08000000>;
 	};
-	
+	leds {
+		compatible = "gpio-leds";
+		logo {
+			label = "bcm53xx:white:logo";
+			gpios = <&chipcommon 1 GPIO_ACTIVE_HIGH>;
+			linux,default-trigger = "default-on";
+		};
+		power0 {
+			label = "bcm53xx:green:power";
+			gpios = <&chipcommon 2 GPIO_ACTIVE_LOW>;
+			linux,default-trigger = "default-on";
+		};
+		power1 {
+			label = "bcm53xx:amber:power";
+			gpios = <&chipcommon 3 GPIO_ACTIVE_LOW>;
+		};
+		usb {
+			label = "bcm53xx:blue:usb";
+			gpios = <&chipcommon 8 GPIO_ACTIVE_LOW>;
+			trigger-sources = <&ohci_port1>, <&ehci_port1>,
+					  <&xhci_port1>;
+			linux,default-trigger = "usbport";
+		};
+		wireless {
+			label = "bcm53xx:blue:wireless";
+			gpios = <&chipcommon 11 GPIO_ACTIVE_LOW>;
+		};
+	};
+	gpio-keys {
+		compatible = "gpio-keys";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		wps {
+			label = "WPS";
+			linux,code = <KEY_WPS_BUTTON>;
+			gpios = <&chipcommon 4 GPIO_ACTIVE_LOW>;
+		};
+		rfkill {
+			label = "WiFi";
+			linux,code = <KEY_RFKILL>;
+			gpios = <&chipcommon 5 GPIO_ACTIVE_LOW>;
+		};
+		restart {
+			label = "Reset";
+			linux,code = <KEY_RESTART>;
+			gpios = <&chipcommon 6 GPIO_ACTIVE_LOW>;
+		};
+	};
+	aliases {
+			serial0 = &uart0;
+		};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+
+	nand-controller@18028000 {
+		nandcs: nand@0 {
+			compatible = "brcm,nandcs";
+			reg = <0>;
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			/*
+			 * Same as using the bcm5301x-nand-cs0-bch1.dtsi
+			 * include from the Linux kernel.
+			 */
+			nand-ecc-algo = "bch";
+			nand-ecc-strength = <1>;
+			nand-ecc-step-size = <512>;
+
+			partitions {
+				compatible = "brcm,bcm947xx-cfe-partitions";
+			};
+		};
+	};
+};
+
+&uart0 {
+	clock-frequency = <100000000>;
+	status = "okay";
 };

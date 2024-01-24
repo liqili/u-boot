@@ -129,10 +129,17 @@ config BCM6878
 
 config BCM4708
 	bool "Support for Broadcom 4708 Family"
-	select SYS_ARCH_TIMER
 	select CPU_V7A
+	select DM_GPIO
 	select DM_SERIAL
-	select PL01X_SERIAL
+	select OF_CONTROL
+	select TIMER
+	select SYS_NS16550
+	select ARM_GLOBAL_TIMER
+	imply SYS_THUMB_BUILD
+	imply MTD_RAW_NAND
+	imply NAND_BRCMNAND
+	imply NAND_BRCMNAND_IPROC
 
 source "arch/arm/mach-bcmbca/bcm47622/Kconfig"
 source "arch/arm/mach-bcmbca/bcm4908/Kconfig"

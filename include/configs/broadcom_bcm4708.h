@@ -2,6 +2,8 @@
 /*
  * Copyright (C) 2020 Philippe Reynes <philippe.reynes@softathome.com>
  */
+#ifndef __BCM4708_H
+#define __BCM4708_H
 
 #include <linux/sizes.h>
 
@@ -12,14 +14,6 @@
 /* UART */
 #define CONFIG_SYS_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200, \
 					  230400, 500000, 1500000 }
-/* Memory usage */
-#define CONFIG_SYS_MAXARGS		24
-#define CONFIG_SYS_MALLOC_LEN		(1024 * 1024 * 32)
-#define CONFIG_SYS_BOOTM_LEN		(32 * 1024 * 1024)
-
-/*
- * 6750
- */
 
 /* RAM */
 #define PHYS_SDRAM_1			0x00000000UL
@@ -28,33 +22,40 @@
 
 /* U-Boot */
 #define CONFIG_SYS_INIT_SP_ADDR		(CONFIG_TEXT_BASE + SZ_16M)
-#define CONFIG_SYS_LOAD_ADDR		CONFIG_TEXT_BASE
 
-#define CONFIG_SKIP_LOWLEVEL_INIT 1
+/* Called "periph_clk" in Linux, used by the global timer */
+#define CFG_SYS_HZ_CLOCK        500000000
 
-// #ifdef CONFIG_MTD_RAW_NAND
-#define CONFIG_SYS_MAX_NAND_DEVICE	1
-#define CONFIG_SYS_NAND_SELF_INIT 1
-#define CONFIG_SYS_NAND_ONFI_DETECTION
-// #endif /* CONFIG_MTD_RAW_NAND */
+/* Called "iprocslow" in Linux */
+#define CFG_SYS_NS16550_CLK     100000000
 
-/* U-Boot */
+/* console configuration */
+#define CONSOLE_ARGS "console_args=console=ttyS0,115200n8\0"
+#define MAX_CPUS "max_cpus=maxcpus=2\0"
+#define EXTRA_ARGS "extra_args=earlycon=uart8250,mmio32,0x18000300\0"
 
-#define CFG_SYS_INIT_RAM_ADDR	0x84200000
-#define CFG_SYS_INIT_RAM_SIZE	0x000a0000
+#define BASE_ARGS "${console_args} ${extra_args} ${pcie_args}"  \
+          " ${max_cpus}  ${log_level} ${reserved_mem}"
+#define SETBOOTARGS "setbootargs=setenv bootargs " BASE_ARGS "\0"
 
-#define CFG_SYS_INIT_SP_OFFSET \
-	(CFG_SYS_INIT_RAM_SIZE - GENERATED_GBL_DATA_SIZE)
-#define CFG_SYS_INIT_SP_ADDR \
-	(CFG_SYS_INIT_RAM_ADDR + CFG_SYS_INIT_SP_OFFSET)
-
+#define KERNEL_LOADADDR_CFG \
+    "loadaddr=0x01000000\0" \
+    "dtb_loadaddr=0x02000000\0"
 
 /*
- * 96750ref1
+ * Hardcoded for the only boards we support, if you add more
+ * boards, add a more clever bootcmd!
  */
-#define CONFIG_ARCH_CPU_INIT
-#define COUNTER_FREQUENCY       50000000
-#define CONFIG_ENV_SIZE		(8 * 1024)
+#define NS_BOOTCMD "bootcmd_dlink_dir8xxl=seama 0x00fe0000; go 0x01000000"
 
-#define CONFIG_SYS_BOOTMAPSZ	(128 << 20)
-#define CONFIG_SYS_FDT_PAD	0x80000
+#define ARCH_ENV_SETTINGS \
+    CONSOLE_ARGS \
+    MAX_CPUS \
+    EXTRA_ARGS \
+    KERNEL_LOADADDR_CFG \
+    NS_BOOTCMD
+
+#define CFG_EXTRA_ENV_SETTINGS \
+    ARCH_ENV_SETTINGS
+
+#endif
