@@ -15,6 +15,14 @@
 		reg = <0x00000000 0x08000000
 		       0x88000000 0x08000000>;
 	};
+	nvram@1eff0000 {
+		compatible = "brcm,nvram";
+		reg = <0x1eff0000 0x10000>;
+
+		et0macaddr: et0macaddr {
+			#nvmem-cell-cells = <1>;
+		};
+	};
 	leds {
 		compatible = "gpio-leds";
 		logo {
@@ -96,4 +104,35 @@
 &uart0 {
 	clock-frequency = <100000000>;
 	status = "okay";
+};
+&srab {
+	status = "okay";
+
+	ports {
+		port@0 {
+			label = "lan4";
+		};
+
+		port@1 {
+			label = "lan3";
+		};
+
+		port@2 {
+			label = "lan2";
+		};
+
+		port@3 {
+			label = "lan1";
+		};
+
+		port@4 {
+			label = "wan";
+			nvmem-cells = <&et0macaddr 5>;
+			nvmem-cell-names = "mac-address";
+		};
+
+		port@5 {
+			label = "cpu";
+		};
+	};
 };

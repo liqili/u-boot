@@ -29,6 +29,9 @@
 /* Called "iprocslow" in Linux */
 #define CFG_SYS_NS16550_CLK     100000000
 
+#define CONFIG_CMD_NET 1
+#define CONFIG_CMD_PING 1
+
 /* console configuration */
 #define CONSOLE_ARGS "console_args=console=ttyS0,115200n8\0"
 #define MAX_CPUS "max_cpus=maxcpus=2\0"
